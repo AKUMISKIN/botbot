@@ -538,11 +538,14 @@ Silahkan @${m.mentionedJid[0].split`@`[0]} untuk ketik terima/tolak`
             }
             break
 	    case 'donasi': case 'sewabot': case 'sewa': case 'buypremium': case 'donate': {
-                hisoka.sendMessage(m.chat, { image: { url: 'https://telegra.ph/file/dcb90fa0c468547c65a72.jpg' }, caption: `*Hai Kak ${m.pushName}*\n\n Ika Botz Harga\n⭔ 10k Per Group via E-Walet/Qris Permanen\n⭔ 20k via Pulsa Tri Permanen\nMau Beli Chat Owner wa.me/628888425016\nLink Group Bot https://chat.whatsapp.com/FtVqPRZr4C0FqDdM167bEK 🥀😆 }, { quoted: m })
+                hisoka.sendMessage(m.chat, { image: { url: 'https://telegra.ph/file/dcb90fa0c468547c65a72.jpg' }, caption: `*Hai Kak ${m.pushName}*\n\n Ika Botz Harga\n⭔ 10k Per Group via E-Walet/Qris Permanen\n⭔ 20k via Pulsa Tri Permanen\n\n Mau Beli Chat Owner wa.me/628888425016` }, { quoted: m })
             }
             break
+            case 'gc':
+            m.reply(`https://chat.whatsapp.com/FtVqPRZr4C0FqDdM167bEK`)
+            break
             case 'sc': {
-                m.reply('Script : https://github.com/DikaArdnt/Hisoka-Morou\n\n Dont Forget Give Star\n\nDonate : 6281615075793 (Link Aja)\nSaweria : https://saweria.co/DikaArdnt\nPaypal : https://www.paypal.me/Cakhaho\n\n Dont Forget Donate')
+                m.reply('Script : https://github.com/DikaArdnt/Hisoka-Morou')
             }
             break
             case 'chat': {
@@ -565,7 +568,7 @@ Silahkan @${m.mentionedJid[0].split`@`[0]} untuk ketik terima/tolak`
                 }
             }
             break
-	   case 'family100': {
+	    case 'family100': {
                 if ('family100'+m.chat in _family100) {
                     m.reply('Masih Ada Sesi Yang Belum Diselesaikan!')
                     throw false
@@ -2810,13 +2813,13 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
 └───────⭓`
                 let btn = [{
                                 urlButton: {
-                                    displayText: 'Youtube',
+                                    displayText: 'Youtube ',
                                     url: 'https://youtube.com/channel/UC-X9Ro3gLdT0K4tGJusYhig'
                                 }
                             }, {
                                 callButton: {
                                     displayText: 'Number Phone Owner',
-                                    phoneNumber: '+62 888-8425-016'
+                                    phoneNumber: '089670427615'
                                 }
                             }, {
                                 quickReplyButton: {
@@ -2830,8 +2833,8 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
                                 }  
                             }, {
                                 quickReplyButton: {
-                                    displayText: 'Sewa Bot',
-                                    id: 'sewa'
+                                    displayText: 'Group Bot 📷',
+                                    id: 'gc'
                                 }
                             }]
                         hisoka.send5ButImg(m.chat, anu, hisoka.user.name, global.thumb, btn)

@@ -121,16 +121,11 @@ let Hello = `Welcome To ${metadata.subject} @${num.split("@")[0]}`
                                 quickReplyButton: {
                                     displayText: 'Owner',
                                     id: 'owner'
-				}
+				                }
                             }, {
                                 quickReplyButton: {
                                     displayText: 'Sewa Botz',
                                     id: 'sewa'
-                                }
-                            }, {
-                                quickReplyButton: {
-                                    displayText: 'Status Botz',
-                                    id: 'ping'
                                 }  
                             }, {
                                 quickReplyButton: {
@@ -170,11 +165,6 @@ let Hello = `Welcome To ${metadata.subject} @${num.split("@")[0]}`
                                 quickReplyButton: {
                                     displayText: 'Sewa Botz',
                                     id: 'sewa'
-				}
-                            }, {
-                                quickReplyButton: {
-                                    displayText: 'Status Botz',
-                                    id: 'ping'
                                 }  
                             }, {
                                 quickReplyButton: {
@@ -186,13 +176,13 @@ let Hello = `Welcome To ${metadata.subject} @${num.split("@")[0]}`
                     }
                 }), { userJid: anu.id })
                 hisoka.relayMessage(anu.id, template.message, { messageId: template.key.id })
-                }
             }
-        } catch (err) {
-            console.log(err)
         }
-    })
-	
+    } catch (err) {
+        console.log(err)
+    }
+})
+
     // Setting
     hisoka.decodeJid = (jid) => {
         if (!jid) return jid

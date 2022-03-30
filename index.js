@@ -93,94 +93,34 @@ auth: state
     hisoka.ev.on('group-participants.update', async (anu) => {
         console.log(anu)
         try {
+            let metadata = await hisoka.groupMetadata(anu.id)
+            let participants = anu.participants
+            for (let num of participants) {
+                // Get Profile Picture User
+                try {
+                    ppuser = await hisoka.profilePictureUrl(num, 'image')
+                } catch {
+                    ppuser = 'https://i0.wp.com/www.gambarunik.id/wp-content/uploads/2019/06/Top-Gambar-Foto-Profil-Kosong-Lucu-Tergokil-.jpg'
+                }
+
+                // Get Profile Picture Group
+                try {
                     ppgroup = await hisoka.profilePictureUrl(anu.id, 'image')
                 } catch {
                     ppgroup = 'https://i0.wp.com/www.gambarunik.id/wp-content/uploads/2019/06/Top-Gambar-Foto-Profil-Kosong-Lucu-Tergokil-.jpg'
                 }
-                       let hello = `@${num.split("@")[0]} Leaving To ${metadata.subject}`
-let Hello = `Welcome To ${metadata.subject} @${num.split("@")[0]}`
+
                 if (anu.action == 'add') {
-                    let message = await prepareWAMessageMedia({ image: {url: ppuser }}, { upload: hisoka.waUploadToServer })
-                const template = generateWAMessageFromContent(anu.id, proto.Message.fromObject({
-                    templateMessage: {
-                        hydratedTemplate: {
-                            imageMessage: message.imageMessage,
-                            hydratedContentText: hello,
-                            hydratedFooterText: 'IKABOTZ',
-                            hydratedButtons: [{
-                                urlButton: {
-                                    displayText: 'Group Bot 📷',
-                                    url: 'https://chat.whatsapp.com/FtVqPRZr4C0FqDdM167bEK'
-                                }
-                            }, {
-                            	urlButton: {
-                                displayText: '🧸Youtube',
-                                    url: 'https://www.youtube.com/channel/UC-X9Ro3gLdT0K4tGJusYhig'
-                                }
-                            }, {
-                                quickReplyButton: {
-                                    displayText: 'Owner',
-                                    id: 'owner'
-				                }
-                            }, {
-                                quickReplyButton: {
-                                    displayText: 'Sewa Botz',
-                                    id: 'sewa'
-                                }  
-                            }, {
-                                quickReplyButton: {
-                                    displayText: 'Welcome',
-                                    id: 'Welcome'
-                                }
-                            }]
-                        }
-                    }
-                }), { userJid: anu.id })
-                hisoka.relayMessage(anu.id, template.message, { messageId: template.key.id })
-
+                    hisoka.sendMessage(anu.id, { image: { url: ppuser }, contextInfo: { mentionedJid: [num] }, caption: `Welcome To ${metadata.subject} @${num.split("@")[0]}` })
                 } else if (anu.action == 'remove') {
-                                let message = await prepareWAMessageMedia({ image: {url: ppuser }}, { upload: hisoka.waUploadToServer })
-                const template = generateWAMessageFromContent(anu.id, proto.Message.fromObject({
-                    templateMessage: {
-                        hydratedTemplate: {
-                            imageMessage: message.imageMessage,
-                            hydratedContentText: Ttes,
-                            hydratedFooterText: 'IKABOTZ',
-                            hydratedButtons: [{
-                                urlButton: {
-                                    displayText: 'Group Bot 📷',
-                                    url: 'https://chat.whatsapp.com/FtVqPRZr4C0FqDdM167bEK'
-                                }
-                            }, {
-                            	urlButton: {
-                                displayText: '🧸Youtube',
-                                    url: 'https://www.youtube.com/channel/UC-X9Ro3gLdT0K4tGJusYhig'
-                                }
-                            }, {
-                                quickReplyButton: {
-                                    displayText: 'Owner',
-                                    id: 'owner'
-                                }
-                            }, {
-                                quickReplyButton: {
-                                    displayText: 'Sewa Botz',
-                                    id: 'sewa'
-                                }  
-                            }, {
-                                quickReplyButton: {
-                                    displayText: 'Selamat Tinggal',
-                                    id: 'Bye'
-                                }
-                            }]
-                        }
-                    }
-                }), { userJid: anu.id })
-                hisoka.sendMessage(anu.id, template.message, { messageId: template.key.id })
-            } catch (err) {
-                console.log(err)
+                    hisoka.sendMessage(anu.id, { image: { url: ppuser }, contextInfo: { mentionedJid: [num] }, caption: `@${num.split("@")[0]} Leaving To ${metadata.subject}` })
+                }
             }
-        })
-
+        } catch (err) {
+            console.log(err)
+        }
+    })
+	
     // Setting
     hisoka.decodeJid = (jid) => {
         if (!jid) return jid

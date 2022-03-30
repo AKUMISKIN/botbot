@@ -132,6 +132,9 @@ let Hello = `Welcome To ${metadata.subject} @${num.split("@")[0]}`
                                     displayText: 'Welcome',
                                     id: 'Welcome'
                                 }
+                            }]
+                        }
+                    }
                 }), { userJid: anu.id })
                 hisoka.relayMessage(anu.id, template.message, { messageId: template.key.id })
 
@@ -172,13 +175,11 @@ let Hello = `Welcome To ${metadata.subject} @${num.split("@")[0]}`
                         }
                     }
                 }), { userJid: anu.id })
-                hisoka.relayMessage(anu.id, template.message, { messageId: template.key.id })
+                hisoka.sendMessage(anu.id, template.message, { messageId: template.key.id })
+            } catch (err) {
+                console.log(err)
             }
-        }
-    } catch (err) {
-        console.log(err)
-    }
-})
+        })
 
     // Setting
     hisoka.decodeJid = (jid) => {

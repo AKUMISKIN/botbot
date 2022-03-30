@@ -97,7 +97,7 @@ auth: state
                 } catch {
                     ppgroup = 'https://i0.wp.com/www.gambarunik.id/wp-content/uploads/2019/06/Top-Gambar-Foto-Profil-Kosong-Lucu-Tergokil-.jpg'
                 }
-                       let Ttes = `@${num.split("@")[0]} Leaving To ${metadata.subject}`
+                       let hello = `@${num.split("@")[0]} Leaving To ${metadata.subject}`
 let Hello = `Welcome To ${metadata.subject} @${num.split("@")[0]}`
                 if (anu.action == 'add') {
                     let message = await prepareWAMessageMedia({ image: {url: ppuser }}, { upload: hisoka.waUploadToServer })
@@ -105,7 +105,7 @@ let Hello = `Welcome To ${metadata.subject} @${num.split("@")[0]}`
                     templateMessage: {
                         hydratedTemplate: {
                             imageMessage: message.imageMessage,
-                            hydratedContentText: Hello,
+                            hydratedContentText: hello,
                             hydratedFooterText: 'IKABOTZ',
                             hydratedButtons: [{
                                 urlButton: {
@@ -141,7 +141,7 @@ let Hello = `Welcome To ${metadata.subject} @${num.split("@")[0]}`
                         }
                     }
                 }), { userJid: anu.id })
-                kiki.relayMessage(anu.id, template.message, { messageId: template.key.id })
+                hisoka.relayMessage(anu.id, template.message, { messageId: template.key.id })
 
                 } else if (anu.action == 'remove') {
                                 let message = await prepareWAMessageMedia({ image: {url: ppuser }}, { upload: hisoka.waUploadToServer })

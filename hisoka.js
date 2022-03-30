@@ -2590,10 +2590,7 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
 │⭔ ${prefix}husbu
 │⭔ ${prefix}neko
 │⭔ ${prefix}shinobu
-│⭔ ${prefix}waifus (nsfw)
-│⭔ ${prefix}nekos (nsfw)
-│⭔ ${prefix}trap (nsfw)
-│⭔ ${prefix}blowjob (nsfw)
+│⭔ ${prefix}loli
 │
 └───────⭓
 
@@ -2811,7 +2808,15 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
 │⭔ ${prefix}setexif
 │
 └───────⭓`
-                let btn = [{
+
+
+
+
+
+
+
+
+          let btn = [{
                                 urlButton: {
                                     displayText: 'Youtube ',
                                     url: 'https://youtube.com/channel/UC-X9Ro3gLdT0K4tGJusYhig'

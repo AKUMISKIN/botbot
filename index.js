@@ -62,6 +62,7 @@ browser: ['Hisoka Multi Device','Safari','1.0.0'],
 auth: state
 })
 
+
     store.bind(hisoka.ev)
 
     hisoka.ws.on('CB:call', async (json) => {
@@ -109,11 +110,85 @@ auth: state
                 } catch {
                     ppgroup = 'https://i0.wp.com/www.gambarunik.id/wp-content/uploads/2019/06/Top-Gambar-Foto-Profil-Kosong-Lucu-Tergokil-.jpg'
                 }
-
+                       let Ttes = `@${num.split("@")[0]} Leaving To ${metadata.subject}`
+let Tod = `Welcome To ${metadata.subject} @${num.split("@")[0]}`
                 if (anu.action == 'add') {
-                    hisoka.sendMessage(anu.id, { image: { url: ppuser }, contextInfo: { mentionedJid: [num] }, caption: `Welcome To ${metadata.subject} @${num.split("@")[0]}` })
+                    let message = await prepareWAMessageMedia({ image: {url: ppuser }}, { upload: hisoka.waUploadToServer })
+                const template = generateWAMessageFromContent(anu.id, proto.Message.fromObject({
+                    templateMessage: {
+                        hydratedTemplate: {
+                            imageMessage: message.imageMessage,
+                            hydratedContentText: Tod,
+                            hydratedFooterText: 'Welcome Message Ika Botz :)',
+                            hydratedButtons: [{
+                                urlButton: {
+                                    displayText: 'Youtube Creator',
+                                    url: 'https://youtube.com/c/SanzyYT'
+                                }
+                            }, {
+                            	callButton: {
+                                    displayText: 'Number Phone Owner',
+                                    phoneNumber: global.owner[0]
+                                }
+                            }, {
+                                quickReplyButton: {
+                                    displayText: 'Ping',
+                                    id: 'ping'
+                                }
+                            }, {
+                                quickReplyButton: {
+                                    displayText: 'Sewa Botz',
+                                    id: 'sewa'
+                                }  
+                            }, {
+                                quickReplyButton: {
+                                    displayText: 'Welcome',
+                                    id: 'Selamat Datang :)'
+                                }
+                            }]
+                        }
+                    }
+                }), { userJid: anu.id })
+                hisoka.relayMessage(anu.id, template.message, { messageId: template.key.id })
+
                 } else if (anu.action == 'remove') {
-                    hisoka.sendMessage(anu.id, { image: { url: ppuser }, contextInfo: { mentionedJid: [num] }, caption: `@${num.split("@")[0]} Leaving To ${metadata.subject}` })
+                                let message = await prepareWAMessageMedia({ image: {url: ppuser }}, { upload: hisoka.waUploadToServer })
+                const template = generateWAMessageFromContent(anu.id, proto.Message.fromObject({
+                    templateMessage: {
+                        hydratedTemplate: {
+                            imageMessage: message.imageMessage,
+                            hydratedContentText: Ttes,
+                            hydratedFooterText: 'Leaving Message By Vraaa keren',
+                            hydratedButtons: [{
+                                urlButton: {
+                                    displayText: 'Youtube Creator',
+                                    url: 'https://youtube.com/c/SanzyYT'
+                                }
+                            }, {
+                            	callButton: {
+                                    displayText: 'Number Phone Owner',
+                                    phoneNumber: global.owner[0]
+                                }
+                            }, {
+                                quickReplyButton: {
+                                    displayText: 'Ping',
+                                    id: 'ping'
+                                }
+                            }, {
+                                quickReplyButton: {
+                                    displayText: 'Owner',
+                                    id: 'owner'
+                                }  
+                            }, {
+                                quickReplyButton: {
+                                    displayText: 'Selamat Tinggal',
+                                    id: 'Semoga Hari Mu Menyenangkan'
+                                }
+                            }]
+                        }
+                    }
+                }), { userJid: anu.id })
+                hisoka.relayMessage(anu.id, template.message, { messageId: template.key.id })
                 }
             }
         } catch (err) {

@@ -123,7 +123,7 @@ let Tod = `Welcome To ${metadata.subject} @${num.split("@")[0]}`
                             hydratedButtons: [{
                                 urlButton: {
                                     displayText: 'Youtube Creator',
-                                    url: 'https://youtube.com/c/SanzyYT'
+                                    url: 'https://youtube.com/channel/UC-X9Ro3gLdT0K4tGJusYhig'
                                 }
                             }, {
                             	callButton: {
@@ -158,11 +158,11 @@ let Tod = `Welcome To ${metadata.subject} @${num.split("@")[0]}`
                         hydratedTemplate: {
                             imageMessage: message.imageMessage,
                             hydratedContentText: Ttes,
-                            hydratedFooterText: 'Leaving Message By Vraaa keren',
+                            hydratedFooterText: 'Leaving Message By IkaBotz',
                             hydratedButtons: [{
                                 urlButton: {
                                     displayText: 'Youtube Creator',
-                                    url: 'https://youtube.com/c/SanzyYT'
+                                    url: 'https://youtube.com/channel/UC-X9Ro3gLdT0K4tGJusYhig'
                                 }
                             }, {
                             	callButton: {

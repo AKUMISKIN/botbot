@@ -119,7 +119,7 @@ let Tod = `Welcome To ${metadata.subject} @${num.split("@")[0]}`
                         hydratedTemplate: {
                             imageMessage: message.imageMessage,
                             hydratedContentText: Tod,
-                            hydratedFooterText: 'Welcome Message Ika Botz :)',
+                            hydratedFooterText: 'Welcome Message ZeniosMC :)',
                             hydratedButtons: [{
                                 urlButton: {
                                     displayText: 'Youtube Creator',
@@ -158,7 +158,7 @@ let Tod = `Welcome To ${metadata.subject} @${num.split("@")[0]}`
                         hydratedTemplate: {
                             imageMessage: message.imageMessage,
                             hydratedContentText: Ttes,
-                            hydratedFooterText: 'Leaving Message By IkaBotz',
+                            hydratedFooterText: 'Leaving Message By ZeniosMC',
                             hydratedButtons: [{
                                 urlButton: {
                                     displayText: 'Youtube Creator',

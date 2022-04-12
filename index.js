@@ -14,6 +14,7 @@ const yargs = require('yargs/yargs')
 const chalk = require('chalk')
 const FileType = require('file-type')
 const path = require('path')
+const _ = require('lodash')
 const PhoneNumber = require('awesome-phonenumber')
 const { imageToWebp, videoToWebp, writeExifImg, writeExifVid } = require('./lib/exif')
 const { smsg, isUrl, generateMessageTag, getBuffer, getSizeMedia, fetchJson, await, sleep } = require('./lib/myfunc')
@@ -39,32 +40,43 @@ global.db = new Low(
       new mongoDB(opts['db']) :
       new JSONFile(`src/database.json`)
 )
-global.db.data = {
+global.DATABASE = global.db // Backwards Compatibility
+global.loadDatabase = async function loadDatabase() {
+  if (global.db.READ) return new Promise((resolve) => setInterval(function () { (!global.db.READ ? (clearInterval(this), resolve(global.db.data == null ? global.loadDatabase() : global.db.data)) : null) }, 1 * 1000))
+  if (global.db.data !== null) return
+  global.db.READ = true
+  await global.db.read()
+  global.db.READ = false
+  global.db.data = {
     users: {},
     chats: {},
-    sticker: {},
     database: {},
     game: {},
     settings: {},
     others: {},
+    sticker: {},
     ...(global.db.data || {})
+  }
+  global.db.chain = _.chain(global.db.data)
 }
+loadDatabase()
 
+// save database every 30seconds
 if (global.db) setInterval(async () => {
     if (global.db.data) await global.db.write()
   }, 30 * 1000)
 
 async function startHisoka() {
-const hisoka = hisokaConnect({
-logger: pino({ level: 'silent' }),
-printQRInTerminal: true,
-browser: ['Hisoka Multi Device','Safari','1.0.0'],
-auth: state
-})
-
+    const hisoka = hisokaConnect({
+        logger: pino({ level: 'silent' }),
+        printQRInTerminal: true,
+        browser: ['Hisoka Multi Device','Safari','1.0.0'],
+        auth: state
+    })
 
     store.bind(hisoka.ev)
-
+    
+    // anticall auto block
     hisoka.ws.on('CB:call', async (json) => {
     const callerId = json.content[0].attrs['call-creator']
     if (json.content[0].tag == 'offer') {
@@ -86,7 +98,7 @@ auth: state
         if (mek.key.id.startsWith('BAE5') && mek.key.id.length === 16) return
         m = smsg(hisoka, mek, store)
         require("./hisoka")(hisoka, m, chatUpdate, store)
-        } catch (err) {
+       } catch (err) {
             console.log(err)
         }
     })
